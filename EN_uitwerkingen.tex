@@ -268,4 +268,19 @@ U = coefMAT\f
 \end{lstlisting}
 \newpage
 \section{Opdracht 2}
+$$-\dfrac{d^2u}{dx^2} = 12x^2$$
+$$ x \in (0,1)$$
+Met randvoorwaarden: 
+\begin{align*}
+\dfrac{du(0)}{dx} = 0\\
+u(1) = 0
+\end{align*}
+a: De exacte oplossing
+\begin{gather*}
+\dfrac{d^2u}{dx^2} = -12x^2 \implies \dfrac{du}{dx} = -4x^3 + C\\
+\dfrac{du(0)}{dx} = -4 \times 0^3 + C = 0 \implies C = 0\\
+\dfrac{du}{dx} = -4x^3 \implies u(x) = -x^4 + D\\
+u(1) = -1^4 + D = 0 \implies D = 1
+\end{gather*}
+
 \end{document}
