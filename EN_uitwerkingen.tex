@@ -1,0 +1,178 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath}
+\usepackage[makeroom]{cancel}
+\usepackage{mcode}
+\begin{document}
+\title{Engineering week 3 opgaven}
+\author{Simcha van Helvoort}
+\maketitle
+
+Dit bestand bevat de samenvatting en de antwoorden van Engineering week 3 voor het oefenen van mijn LaTeX skills. Eerst zal wordt de stof van deze week uitgelegd en daarna zal ik mijn uitwerkingen van het huiswerk publiceren.
+
+\newpage
+
+\section{Voorbeeld}
+
+$$-\dfrac{d^2u}{dx^2} = 1 = f(x) = f_{\Omega}$$ met $x \in (0, 1) \\
+$
+Met randvoorwaarden:
+\begin{align*}
+    u(0) = 1\\
+	\dfrac{du}{dx}\Big|_{x = 1} = \alpha = 0
+\end{align*}
+
+We benaderen $u(x)$ met de centrale differentie techniek.\\
+Dit is de vergelijking voor $n = 5$.\\
+We beginnen met de basis vergelijking en gaan stap voor stap naar de \\vergelijking die hetzelfde als ODE representeerd:\\\\
+\begin{gather*}
+\begin{pmatrix}
+-2& 1 & 0 & 0 & 0 \\
+1 & -2& 1 & 0 & 0 \\
+0 & 1 & -2& 1 & 0 \\
+0 & 0 & 1 & -2& 1 \\
+0 & 0 & 0 & 1& -2 
+\end{pmatrix}
+%
+\begin{pmatrix}
+u_{1}\\
+u_{2}\\
+u_{3}\\
+u_{4}\\
+u_{5}\\
+\end{pmatrix}
+=
+-h^2
+\begin{pmatrix}
+f_{1}\\
+f_{2}\\
+f_{3}\\
+f_{4}\\
+f_{5}\\
+\end{pmatrix}\\
+u(0)= u_{1} = 1 
+\end{gather*}
+Dit doen we op dezelfde manier als bij de Dirichletvoorwaarden, maar wat moet komen te staan op de plek van de Neumann randvoorwaarden?\\\\
+\begin{gather*}
+\begin{pmatrix}
+1 & 0 & 0 & 0 & 0 \\
+1 & -2& 1 & 0 & 0 \\
+0 & 1 & -2& 1 & 0 \\
+0 & 0 & 1 & -2& 1 \\
+ &   & ? & &  
+\end{pmatrix}
+%
+\begin{pmatrix}
+u_{1}\\
+u_{2}\\
+u_{3}\\
+u_{4}\\
+u_{5}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\
+-h^2f_{2}\\
+-h^2f_{3}\\
+-h^2f_{4}\\
+-h^2f_{5}\\
+\end{pmatrix}\\
+\dfrac{du_{5}}{dx} = \alpha = 0
+\end{gather*}
+Dit kan benaderd worden als
+$\frac{u_{6}-u_{4}}{2h} = \alpha$.\\
+Zoals je weet licht $u_{6}$ buiten je domein, daarom defineren we $u_{6}$ als volgt:\\
+$$
+\frac{u_{6}-u_{4}}{2h} = \alpha \implies u_{6}-u_{4} = 2h\alpha \implies u_{6} = u_{4} + 2h\alpha
+$$
+Dus\\
+\begin{gather*}
+{d^2u}{dx^2} \approx -\frac{1}{h^2}\big(u_{4}-2u_{5}+(u_{4} + 2h\alpha)\big) = f_{5} \implies\\
+-\frac{1}{h^2}(2u_{4}-2u_{5}+ 2h\alpha) = f_{5}
+\implies (2u_{4}-2u_{5}+ 2h\alpha) = -h^2f_{5} \implies\\
+(2u_{4}-2u_{5}) = -h^2f_{5} - 2h\alpha\\
+\end{gather*}
+Dit geeft de uiteindelijke vergelijking:\\
+$$
+\begin{pmatrix}
+1 & 0 & 0 & 0 & 0 \\
+1 & -2& 1 & 0 & 0 \\
+0 & 1 & -2& 1 & 0 \\
+0 & 0 & 1 & -2& 1 \\
+0 & 0 & 0 & 0 & 1 
+\end{pmatrix}
+%
+\begin{pmatrix}
+u_{1}\\
+u_{2}\\
+u_{3}\\
+u_{4}\\
+u_{5}\\
+\end{pmatrix}
+=
+\begin{pmatrix}
+1\\
+-h^2f_{2}\\
+-h^2f_{3}\\
+-h^2f_{4}\\
+-h^2f_{5}\\
+\end{pmatrix}
++
+\begin{pmatrix}
+0\\
+0\\
+0\\
+0\\
+-2h\alpha
+\end{pmatrix}
+$$
+
+
+\section{Opgave 1}
+ODE:\\
+$$
+-\dfrac{d^2u}{dx^2} = 1\\\\
+$$
+Randvoorwaarden:\\
+\begin{align*}
+	\dfrac{du(0)}{dx} = 0 \\
+				 u(1) = 0
+\end{align*}
+
+
+a: De exacte oplossing\\
+\begin{gather*}
+\int d^2u=\int dx^2 \implies \dfrac{du}{dx} = -x + C\implies \dfrac{du(0)}{dx} = C = 0\\
+\int{du} = \int -x dx \implies u = -\frac{1}{2}x^2 + D \implies u(1) = -\frac{1}{2} + D = 0 \implies D = \frac{1}{2}
+\end{gather*}
+Het uiteindelijke antwoord:
+$$u(x) = -\frac{1}{2}x^2 + \frac{1}{2}$$
+b: De numerieke oplossing met $n = 5$.
+$$
+u(x_{i-1}) - 2u(x_{i}) + u(x_{i+1}) = -h^2f_{\Omega}
+$$
+\begin{gather*}
+\begin{pmatrix}
+	  &  & ?&  &  \\
+	 1&-2& 1& 0& 0\\
+	 0& 1&-2& 1& 0\\
+	 0& 0& 1&-2& 1\\
+	 0& 0& 0& 0& 1
+\end{pmatrix}
+\begin{pmatrix}
+	u_{1}\\
+	u_{2}\\
+	u_{3}\\
+	u_{4}\\
+	u_{5}
+\end{pmatrix}=-h^2\vec{f}\\
+\dfrac{du_{1}}{dx}\Big|_{x = 0} = \alpha = 0\approx \frac{u_{2}-u_{0}}{2h}
+\end{gather*}
+Netzo als het voorbeeld drukken we $u_{0}$ uit in $u_{2}$.
+$$
+u_{0} = -2h\alpha + u_{2}
+$$
+Daardoor kunnen $u_{1}$ omschrijven naar
+$$
+u_{1} = \frac{u_{0}-2u_{1}+u_{2}}{h^2} = \frac{-2u_{1}+u_{2}-2h\alpha}{h^2} = -2u_{1} + 2u_{2} - \xcancel{2h\alpha} \text{want } \alpha = 0
+$$
+\end{document}
