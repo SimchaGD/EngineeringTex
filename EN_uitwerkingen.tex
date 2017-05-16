@@ -1,7 +1,7 @@
 \documentclass[11pt]{article}
 \usepackage{amsmath}
 \usepackage[makeroom]{cancel}
-\usepackage{mcode}
+\usepackage[framed, numbered, autolinebreaks, useliterate]{mcode}
 \begin{document}
 \title{Engineering week 3 opgaven}
 \author{Simcha van Helvoort}
@@ -175,4 +175,97 @@ Daardoor kunnen $u_{1}$ omschrijven naar
 $$
 u_{1} = \frac{u_{0}-2u_{1}+u_{2}}{h^2} = \frac{-2u_{1}+u_{2}-2h\alpha}{h^2} = -2u_{1} + 2u_{2} - \xcancel{2h\alpha} \text{want } \alpha = 0
 $$
+De uiteindelijke vergelijking:
+$$
+\begin{pmatrix}
+	-2& 2& 0& 0& 0\\
+	 1&-2& 1& 0& 0\\
+	 0& 1&-2& 1& 0\\
+	 0& 0& 1&-2& 1\\
+	 0& 0& 0& 0& 1
+\end{pmatrix}
+\vec{u} = -h^2
+\begin{pmatrix}
+1\\
+1\\
+1\\
+1\\
+0
+\end{pmatrix}
+$$
+\newpage
+Het bijbehorende matlab-script:
+\begin{lstlisting}
+clear, close, clc
+
+a = 0;
+b = 1;
+n = 3;
+h = (b-a)/(n-1);
+v = a:h:b;
+
+% make matrix A
+rowToeplitz = zeros(1,n);
+rowToeplitz(1) = -2;
+rowToeplitz(2) = 1;
+
+coefMAT = toeplitz(rowToeplitz);
+du0dxRow = zeros(1,n);
+du0dxRow(1) = -2;
+du0dxRow(2) = 2;
+coefMAT(1,:) = du0dxRow;
+
+u0Row = zeros(1,n);
+u0Row(n) = 1;
+coefMAT(n,:) = u0Row
+
+% make vector f
+f = ones(n,1)*-h^2;
+f(n) = 0
+
+U = coefMAT\f
+
+X = linspace(a,b,100);
+syms u(x)
+equation = -diff(u,x,2) == 1
+du = diff(u,x)
+BC = [du(0) == 0, u(1) == 0];
+uSol(x) = dsolve(equation, BC)
+plot(X,uSol(X))
+hold on
+plot(v,U, '*-')
+
+%%
+clear,close,clc
+
+a = 0;
+b = 1;
+n = 40;
+h = (b-a)/(n-1);
+v = a:h:b;
+
+% make matrix A
+rowToeplitz = zeros(1,n);
+rowToeplitz(1) = -2;
+rowToeplitz(2) = 1;
+
+coefMAT = toeplitz(rowToeplitz);
+
+du0dxRow = zeros(1,n);
+du0dxRow(1) = -2;
+du0dxRow(2) = 2;
+coefMAT(1,:) = du0dxRow;
+
+u0Row = zeros(1,n);
+u0Row(n) = 1;
+coefMAT(n,:) = u0Row
+
+% make vector f
+f = ones(n,1)*-12*(0.5^2)*(h)^2;
+f(n) = 0
+
+U = coefMAT\f
+\end{lstlisting}
+\newpage
+\section{Opdracht 2}
 \end{document}
