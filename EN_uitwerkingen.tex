@@ -20,10 +20,9 @@ Met randvoorwaarden:
     u(0) = 1\\
 	\dfrac{du}{dx}\Big|_{x = 1} = \alpha = 0
 \end{align*}
-
 We benaderen $u(x)$ met de centrale differentie techniek.\\
 Dit is de vergelijking voor $n = 5$.\\
-We beginnen met de basis vergelijking en gaan stap voor stap naar de \\vergelijking die hetzelfde als ODE representeerd:\\\\
+We beginnen met de basis vergelijking en gaan stap voor stap naar de \\vergelijking die hetzelfde als ODE representeerd:\\
 \begin{gather*}
 \begin{pmatrix}
 -2& 1 & 0 & 0 & 0 \\
@@ -51,7 +50,7 @@ f_{5}\\
 \end{pmatrix}\\
 u(0)= u_{1} = 1 
 \end{gather*}
-Dit doen we op dezelfde manier als bij de Dirichletvoorwaarden, maar wat moet komen te staan op de plek van de Neumann randvoorwaarden?\\\\
+Dit doen we op dezelfde manier als bij de Dirichletvoorwaarden, maar wat moet komen te staan op de plek van de Neumann randvoorwaarden?\\
 \begin{gather*}
 \begin{pmatrix}
 1 & 0 & 0 & 0 & 0 \\
@@ -147,10 +146,8 @@ a: De exacte oplossing\\
 Het uiteindelijke antwoord:
 $$u(x) = -\frac{1}{2}x^2 + \frac{1}{2}$$
 b: De numerieke oplossing met $n = 5$.
-$$
-u(x_{i-1}) - 2u(x_{i}) + u(x_{i+1}) = -h^2f_{\Omega}
-$$
 \begin{gather*}
+u(x_{i-1}) - 2u(x_{i}) + u(x_{i+1}) = -h^2f_{\Omega}\\
 \begin{pmatrix}
 	  &  & ?&  &  \\
 	 1&-2& 1& 0& 0\\
