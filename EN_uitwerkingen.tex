@@ -193,8 +193,6 @@ $$
 
 Het bijbehorende matlab-script:
 \begin{lstlisting}
-clear, close, clc
-
 a = 0;
 b = 1;
 n = 3;
@@ -231,37 +229,6 @@ uSol(x) = dsolve(equation, BC)
 plot(X,uSol(X))
 hold on
 plot(v,U, '*-')
-
-%%
-clear,close,clc
-
-a = 0;
-b = 1;
-n = 40;
-h = (b-a)/(n-1);
-v = a:h:b;
-
-% make matrix A
-rowToeplitz = zeros(1,n);
-rowToeplitz(1) = -2;
-rowToeplitz(2) = 1;
-
-coefMAT = toeplitz(rowToeplitz);
-
-du0dxRow = zeros(1,n);
-du0dxRow(1) = -2;
-du0dxRow(2) = 2;
-coefMAT(1,:) = du0dxRow;
-
-u0Row = zeros(1,n);
-u0Row(n) = 1;
-coefMAT(n,:) = u0Row
-
-% make vector f
-f = ones(n,1)*-12*(0.5^2)*(h)^2;
-f(n) = 0
-
-U = coefMAT\f
 \end{lstlisting}
 \newpage
 \section{Opdracht 2}
@@ -280,7 +247,12 @@ a: De exacte oplossing
 u(1) = -1^4 + D = 0 \implies D = 1
 \end{gather*}
 
-b: De numerieke oplossing
+b: De numerieke benadering voor $u(\frac{1}{2})$ met centrale differentie
+\begin{gather*}
+u(\frac{1}{2}) \approx \frac{u(0) - 2u(\frac{1}{2}) + u(1)}{h^2} = -12\times \Big(\frac{1}{2}\Big)^2\\
+u(0) - 2 u\Big(\frac{1}{2}\Big) + 0 = -12 \times \Big(\frac{1}{2}\Big)^2 \times \Big(\frac{1}{2}\Big)^2 = -\frac{3}{4} \implies u(0) = -\frac{3}{4} + 2u\Big(\frac{1}{2}\Big)\\
+\frac{-\frac{3}{4} + 2u\Big(\frac{1}{2}\Big) - 2u(\frac{1}{2}) + 0}{h^2} =
+\end{gather*}
 
 
 \end{document}
